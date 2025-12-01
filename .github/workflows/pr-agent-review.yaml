@@ -15,8 +15,8 @@ jobs:
       contents: write
     name: Run pr agent on PR openings and comments
     steps:
-      - name: PR Agent action step
-        uses: qodo-ai/pr-agent@main
+      - name: Run PR Agent
+        uses: kcftr/pr-agent@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GOOGLE_AI_STUDIO.GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
