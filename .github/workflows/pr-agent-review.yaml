@@ -15,14 +15,20 @@ jobs:
       contents: write
     name: Run pr agent on PR openings and comments
     steps:
-      - name: PR Agent action step
-        uses: qodo-ai/pr-agent@main
+      - name: Checkout PR Agent
+        uses: actions/checkout@v4
+        with:
+          repository: qodo-ai/pr-agent
+          ref: main
+          path: pr-agent
+
+      - name: Run PR Agent
+        uses: ./pr-agent
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GOOGLE_AI_STUDIO.GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           config.model: "gemini/gemini-3-pro-preview"
           config.fallback_models: '["gemini/gemini-3-pro-preview"]'
-          config.custom_model_max_tokens: "1048576"
           github_action_config.auto_review: "true"
           github_action_config.auto_describe: "true"
           github_action_config.auto_improve: "true"
